@@ -1,20 +1,20 @@
-name: Upstream Sync
+名字: Upstream Sync
 
 permissions:
-  contents: write
-  actions: write
-  issues: write
+  contents: 撰写
+  操作: 撰写
+  议题: 撰写
 
 on:
-  schedule:
-    - cron: "0 0 * * *" # every day
+  #schedule:
+  #  - cron: "0 0 * * *" # every day
   workflow_dispatch:
     inputs:
       confirm_breaking_update:
-        description: "I have reviewed any compatibility update notice and agree to apply it if present / 我已阅读可能存在的兼容性更新公告，并同意在有此类更新时应用"
+        描述: "I have reviewed any compatibility update notice and agree to apply it if present / 我已阅读可能存在的兼容性更新公告，并同意在有此类更新时应用"
         required: true
-        default: false
-        type: boolean
+        默认: false
+        请键入: boolean
 
 concurrency:
   group: upstream-sync-${{ github.repository }}
@@ -22,18 +22,18 @@ concurrency:
 
 jobs:
   sync_latest_from_upstream:
-    name: Sync latest commits from upstream repo
+    名字: Sync latest commits from upstream repo
     runs-on: ubuntu-latest
     if: ${{ github.event.repository.fork }}
 
     steps:
-      - name: Checkout target repo
+      - 名字: Checkout target repo
         uses: actions/checkout@v6
         with:
           ref: main
           fetch-depth: 0
 
-      - name: Check breaking update policy
+      - 名字: Check breaking update policy
         id: breaking_guard
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
